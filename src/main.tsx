@@ -7,15 +7,25 @@ import {
     RouterProvider
 } from "react-router-dom";
 import ListShifts from "./s3/pve/ListShifts";
+import ShiftPage from "./s3/pve/ShiftPage";
+import {GetShift} from "./s3/pve/getShift";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App/>
-    },
-    {
-        path: "/three/salmon",
-        element: <ListShifts/>
+        element: <App/>,
+        children: [
+            {
+                path: "/three/salmon",
+                element: <ListShifts/>
+            },
+            {
+                path: "/three/salmon/:userId/:shiftId",
+                element: <ShiftPage/>,
+                //@ts-ignore
+                loader: GetShift
+            }
+        ]
     }
 ])
 
